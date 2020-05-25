@@ -24,7 +24,7 @@ module.exports = {
 
   production: {
     client: "pg",
-    connection: pgConnection,
+    // connection: pgConnection,
     pool: {
       min: 2,
       max: 10,
