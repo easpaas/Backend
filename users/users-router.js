@@ -6,16 +6,15 @@ const { isValid } = require("./users-service.js");
 
 router.use(restricted);
 
-router.get("/", (req, res) => {
-  Users.find()
-    .then(users => {
-      res.status(200).json({ users, jwt: req.jwt });
-    })
-    .catch(err => res.send(err));
-});
+// router.get("/", (req, res) => {
+//   Users.find()
+//     .then(users => {
+//       res.status(200).json({ users, jwt: req.jwt });
+//     })
+//     .catch(err => res.send(err));
+// });
 
-// only accounts with the admin role can create users
-router.post("/", checkRoles(["admin"]), (req, res) => {
+router.post("/", (req, res) => {
   const user = req.body;
 
   if (isValid(user)) {
@@ -33,11 +32,11 @@ router.post("/", checkRoles(["admin"]), (req, res) => {
 
 
 // middleware
-function checkRoles(roles) {
+function checkRole(user) {
   return function (req, res, next) {
-    const role = req.jwt.role;
+    const seller = req.jwt.seller;
 
-    if (req.jwt && req.jwt.role && roles.includes(role)) {
+    if (req.jwt && req.jwt.seller) {
       next();
     } else {
       res.status(403).json({ you: "have no power here" });

@@ -17,7 +17,6 @@ router.post("/register", (req, res) => {
 
     credentials.password = hash;
 
-    console.log(credentials);
     // save the user to the database
     Users.add(credentials)
       .then(user => {
@@ -56,7 +55,8 @@ function createToken(user) {
   const payload = {
     sub: user.id,
     username: user.username,
-    role: user.role,
+    seller: user.seller,
+    // role: user.role,
   };
 
   const secret = process.env.JWT_SECRET || "keepitsecret,keepitsafe!";

@@ -2,32 +2,15 @@ const db = require("../data/dbConfig.js");
 
 module.exports = {
   add,
-  find,
   findBy,
   findById,
-};
-
-function find() {
-  return db("users as u")
-    .join("roles as r", "u.role", "r.id")
-    .select("u.id", "u.username", "r.name as role")
-    .orderBy("u.id");
 }
+
 
 function findBy(filter) {
   return db("users")
-    .first()
-    .where(filter)
+    .where({ filter });
 }
-
-// function findBy(filter) {
-//   console.log("filter", filter);
-//   return db("users as u")
-//     .join("roles as r", "u.role", "r.id")
-//     .where(filter)
-//     .select("u.id", "u.username", "r.name as role", "u.password")
-//     .orderBy("u.id");
-// }
 
 async function add(user) {
   try {
@@ -40,5 +23,5 @@ async function add(user) {
 }
 
 function findById(id) {
-  return db("users").where({ id }).first();
+  return db("users").where({ id });
 }

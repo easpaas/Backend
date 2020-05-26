@@ -1,23 +1,11 @@
 exports.up = function (knex) {
   return knex.schema
-    .createTable("roles", tbl => {
-      tbl.increments();
-
-      tbl.string("name", 128).notNullable().unique();
-    })
     .createTable("users", tbl => {
       tbl.increments();
 
       tbl.string("username", 128).notNullable().unique().index();
       tbl.string("password", 256).notNullable();
-
-      // FOREIGN KEY
-      tbl
-        .integer("role")
-        .unsigned()
-        .references("roles.id")
-        .onDelete("RESTRICT")
-        .onUpdate("CASCADE");
+      tbl.boolean("seller").defaultTo(false);
     })
     .createTable("items", tbl => {
       tbl.increments();
@@ -27,8 +15,8 @@ exports.up = function (knex) {
       tbl.string("image_url").notNullable();
       tbl.string("description").notNullable();
       tbl.decimal("starting_bid").notNullable();
-    // tbl.date("list date").notNullable();
-    // tbl.boolean("sold").default("false")
+      // tbl.date("list date").notNullable();
+      tbl.boolean("sold").defaultTo(false);
 
       // FOREIGN KEY
       tbl 
@@ -41,5 +29,5 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
-  return knex.schema.dropTableIfExists("items").dropTableIfExists("users").dropTableIfExists("roles");
+  return knex.schema.dropTableIfExists("items").dropTableIfExists("users");
 };
