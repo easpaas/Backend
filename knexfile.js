@@ -1,18 +1,18 @@
 // Update with your config settings.
+require("dotenv").config();
+
+const pgConnection = process.env.DB_URL || "postgresql://postgres@localhost/auth";
 
 module.exports = {
 
   development: {
-    client: 'sqlite3',
-    useNullAsDefault: true,
-    connection: {
-      filename: './data/auction.db3'
-    },
-    pool: {
-      afterCreate: (conn, done) => {
-        conn.run("PRAGMA foreign_keys = ON", done);
-      },
-    },
+    client: 'pg',
+    connection: pgConnection,
+    // pool: {
+    //   afterCreate: (conn, done) => {
+    //     conn.run("PRAGMA foreign_keys = ON", done);
+    //   },
+    // },
     migrations: {
       directory: "./data/migrations",
     },
@@ -24,7 +24,7 @@ module.exports = {
 
   production: {
     client: "pg",
-    // connection: pgConnection,
+    connection: pgConnection,
     pool: {
       min: 2,
       max: 10,
