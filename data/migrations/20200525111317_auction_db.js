@@ -26,7 +26,7 @@ exports.up = function (knex) {
       tbl.string("name").notNullable().index();
       tbl.string("image_url").notNullable();
       tbl.string("description").notNullable();
-      tbl.float("starting_bid").notNullable();
+      tbl.decimal("starting_bid").notNullable();
     // tbl.date("list date").notNullable();
     // tbl.boolean("sold").default("false")
 
