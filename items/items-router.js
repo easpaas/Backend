@@ -67,26 +67,26 @@ router.post("/", (req, res) => {
     });
 });
 
-router.post("/:id/steps", (req, res) => {
-  const stepData = req.body;
-  const { id } = req.params;
+// router.post("/:id/steps", (req, res) => {
+//   const stepData = req.body;
+//   const { id } = req.params;
 
-  Items.findById(id)
-    .then(scheme => {
-      if (scheme) {
-        Items.addStep({...stepData, scheme_id: id}).then(step => {
-          res.status(201).json(step);
-        });
-      } else {
-        res
-          .status(404)
-          .json({ message: "Could not find scheme with given id." });
-      }
-    })
-    .catch(err => {
-      res.status(500).json({ message: "Failed to create new step" });
-    });
-});
+//   Items.findById(id)
+//     .then(scheme => {
+//       if (scheme) {
+//         Items.addStep({...stepData, scheme_id: id}).then(step => {
+//           res.status(201).json(step);
+//         });
+//       } else {
+//         res
+//           .status(404)
+//           .json({ message: "Could not find scheme with given id." });
+//       }
+//     })
+//     .catch(err => {
+//       res.status(500).json({ message: "Failed to create new step" });
+//     });
+// });
 
 router.put("/:id", (req, res) => {
   const { id } = req.params;
