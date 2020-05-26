@@ -1,8 +1,13 @@
 const express = require("express");
 
+const restricted = require("../auth/restricted-middleware.js");
 const Items = require("./items-model.js");
 
+
 const router = express.Router();
+
+// Require JWT to access
+router.use(restricted);
 
 router.get("/", (req, res) => {
   Items.find()
