@@ -93,9 +93,9 @@ router.put("/:id", (req, res) => {
   const changes = req.body;
 
   Items.update(changes, id)
-    .then(updatedScheme => {
-      updatedScheme ?
-        res.status(200).json(updatedScheme)
+    .then(updatedItem => {
+      updatedItem ?
+        res.status(200).json(updatedItem)
         :
         res.status(404).json({ message: "Could not find scheme with given id" })
     })
