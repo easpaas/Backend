@@ -1,13 +1,20 @@
 // Update with your config settings.
 require("dotenv").config();
 
-const pgConnection = process.env.DB_URL || "postgresql://postgres@localhost/auth";
+const pgConnection = process.env.DB_URL || "postgresql://postgres@localhost/silent_auction2";
+const pgPassword = process.env.PG_PASSWORD;
 
 module.exports = {
 
   development: {
     client: 'pg',
-    connection: pgConnection,
+    connection: {
+      host : '127.0.0.1',
+      user : 'postgres',
+      password : pgPassword,
+      database : 'silent_auction2'
+    },
+    // connection: pgConnection,
     // pool: {
     //   afterCreate: (conn, done) => {
     //     conn.run("PRAGMA foreign_keys = ON", done);
