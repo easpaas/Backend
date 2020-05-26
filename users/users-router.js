@@ -6,14 +6,6 @@ const { isValid } = require("./users-service.js");
 
 router.use(restricted);
 
-// router.get("/", (req, res) => {
-//   Users.find()
-//     .then(users => {
-//       res.status(200).json({ users, jwt: req.jwt });
-//     })
-//     .catch(err => res.send(err));
-// });
-
 router.post("/", (req, res) => {
   const user = req.body;
 

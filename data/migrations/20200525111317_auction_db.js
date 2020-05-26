@@ -7,16 +7,16 @@ exports.up = function (knex) {
       tbl.string("password", 256).notNullable();
       tbl.boolean("seller").defaultTo(false);
     })
+
     .createTable("items", tbl => {
       tbl.increments();
 
       // .index() allows users to search by item name
-      tbl.string("name").notNullable().index();
+      tbl.string("title").notNullable();
       tbl.string("image_url").notNullable();
       tbl.string("description").notNullable();
+      tbl.string("category").notNullable().index();
       tbl.decimal("starting_bid").notNullable();
-      // tbl.date("list date").notNullable();
-      tbl.boolean("sold").defaultTo(false);
 
       // FOREIGN KEY
       tbl 
@@ -26,8 +26,28 @@ exports.up = function (knex) {
         .onDelete("RESTRICT")
         .onUpdate("CASCADE");
     })
+
+    .createTable("item_bids", tbl => {
+      // FOREIGN KEY
+      tbl
+        .integer("item_id")
+        .unsigned()
+        .references("items.id")
+        .onDelete("RESTRICT")
+        .onUpdate("CASCADE");
+
+      tbl.decimal("current_bid").notNullable();
+      
+      // FOREIGN KEY
+      tbl
+        .integer("bidder_id")
+        .unsigned()
+        .references("users.id")
+        .onDelete("RESTRICT")
+        .onUpdate("RESTRICT");
+    });
 };
 
 exports.down = function (knex) {
-  return knex.schema.dropTableIfExists("items").dropTableIfExists("users");
+  return knex.schema.dropTableIfExists("item_bids").dropTableIfExists("items").dropTableIfExists("users");
 };
