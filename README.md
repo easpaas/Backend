@@ -11,6 +11,10 @@
 
 - https://drive.google.com/file/d/1Iaivj5FBrVdy6sWnFyHtlmXXXWVI9UOx/view
 
+## DB Design
+
+- https://dbdesigner.page.link/UAheuAbEmu1jbwr37
+
 ## API Documentation 
 
 - https://documenter.getpostman.com/preview/11293438-d0109db7-4ef0-4c92-92ad-b7172bcf98a1?versionTag=latest&apiName=CURRENT&version=latest&documentationLayout=classic-double-column&top-bar=ffffff&right-sidebar=303030&highlight=ef5b25

@@ -9,7 +9,8 @@ module.exports = {
 
 function findBy(filter) {
   return db("users")
-    .where({ filter });
+    .first()
+    .where(filter);
 }
 
 async function add(user) {

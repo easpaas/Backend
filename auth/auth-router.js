@@ -36,7 +36,7 @@ router.post('/login', (req, res) => {
   let {username, password} = req.body;
 
   Users.findBy({ username })
-      .first()
+      // .first()
       .then(someone => {
           if (someone && bcryptjs.compareSync(password, someone.password)) {
               const token = createToken(someone);
@@ -56,7 +56,6 @@ function createToken(user) {
     sub: user.id,
     username: user.username,
     seller: user.seller,
-    // role: user.role,
   };
 
   const secret = process.env.JWT_SECRET || "keepitsecret,keepitsafe!";
