@@ -52,7 +52,9 @@ router.get("/seller/:id", (req, res) => {
     .catch(err => {
       res.status(500).json({ errorMessage: 'Failed to get items for seller' })
     });
-})
+});
+
+// TODO 
 
 router.post("/", (req, res) => {
   const itemData = req.body;

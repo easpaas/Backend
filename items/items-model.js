@@ -28,6 +28,7 @@ function findSellersItems(id) {
   return db("items").where("seller_id", "=",`${id}`);
 }
 
+// TODO 
 
 function findById(id) {
   return db("items").where({ id });

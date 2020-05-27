@@ -4,6 +4,7 @@
   "description": "#### This project was built with Node.js, Express, Knex and Postgres",
   "main": "index.js",
   "scripts": {
+    "test": "jest --watch",
     "start": "node index",
     "server": "nodemon",
     "migrate": "knex migrate:latest",
