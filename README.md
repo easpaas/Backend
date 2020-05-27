@@ -17,7 +17,7 @@
 
 ## API Documentation 
 
-- https://documenter.getpostman.com/preview/11293438-d0109db7-4ef0-4c92-92ad-b7172bcf98a1?versionTag=latest&apiName=CURRENT&version=latest&documentationLayout=classic-double-column&top-bar=ffffff&right-sidebar=303030&highlight=ef5b25
+- https://documenter.getpostman.com/view/11293438/SztBbo1k?version=latest
 
 
 ## Deployment
