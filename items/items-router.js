@@ -77,7 +77,7 @@ router.put("/:id", (req, res) => {
       updatedItem ?
         res.status(200).json(updatedItem)
         :
-        res.status(404).json({ message: "Could not find scheme with given id" })
+        res.status(404).json({ message: "Could not find item with given id" })
     })
     .catch(err => {
       res.status(500).json({ message: "Failed to update item" });
