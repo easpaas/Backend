@@ -28,6 +28,23 @@ module.exports = {
     },
   },
 
+  testing: {
+    client: 'pg',
+    connection: {
+      host : '127.0.0.1',
+      user : 'postgres',
+      password : pgPassword,
+      database : 'silent_auction2',
+      filename: './data/test.db3',
+    },
+    migrations: {
+      directory: './data/migrations',
+    },
+    seeds: {
+      directory: './data/seeds',
+    },
+  },
+
 
   production: {
     client: "pg",
