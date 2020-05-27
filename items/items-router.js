@@ -12,7 +12,7 @@ router.use(restricted);
 router.get("/", (req, res) => {
   Items.find()
     .then(items => {
-      res.status(200).json({data: items});
+      res.status(200).json(items);
     })
     .catch(err => {
       res.status(500).json({ message: "Failed to get Items" });
@@ -25,7 +25,7 @@ router.get("/:id", (req, res) => {
   Items.findById(id)
     .then(item => {
       if (item) {
-        res.json(item);
+        res.status(200).json(item);
       } else {
         res
           .status(404)
@@ -33,27 +33,26 @@ router.get("/:id", (req, res) => {
       }
     })
     .catch(err => {
-      res.status(500).json({ message: "Failed to get Items" });
+      res.status(500).json({ message: "Failed to get items" });
     });
 });
 
-// router.get("/:id/steps", (req, res) => {
-//   const { id } = req.params;
+// Find all items belonging to seller by id
+router.get("/seller/:id", (req, res) => {
+  const {id} = req.params;
 
-//   Items.findSteps(id)
-//     .then(steps => {
-//       if (steps.length) {
-//         res.json(steps);
-//       } else {
-//         res
-//           .status(404)
-//           .json({ message: "Could not find steps for given item" });
-//       }
-//     })
-//     .catch(err => {
-//       res.status(500).json({ message: "Failed to get items" });
-//     });
-// });
+  Items.findSellersItems(id)
+    .then(items => {
+      if(items) {
+        res.status(200).json(items);
+      } else {
+        res.status(404).json({ message: `cannot find seller with id ${id}` })
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ errorMessage: 'Failed to get items for seller' })
+    });
+})
 
 router.post("/", (req, res) => {
   const itemData = req.body;
@@ -66,27 +65,6 @@ router.post("/", (req, res) => {
       res.status(500).json({ message: "Failed to create new item" });
     });
 });
-
-// router.post("/:id/steps", (req, res) => {
-//   const stepData = req.body;
-//   const { id } = req.params;
-
-//   Items.findById(id)
-//     .then(scheme => {
-//       if (scheme) {
-//         Items.addStep({...stepData, scheme_id: id}).then(step => {
-//           res.status(201).json(step);
-//         });
-//       } else {
-//         res
-//           .status(404)
-//           .json({ message: "Could not find scheme with given id." });
-//       }
-//     })
-//     .catch(err => {
-//       res.status(500).json({ message: "Failed to create new step" });
-//     });
-// });
 
 router.put("/:id", (req, res) => {
   const { id } = req.params;
@@ -110,7 +88,7 @@ router.delete("/:id", (req, res) => {
   Items.remove(id)
     .then(deleted => {
       if (deleted) {
-        res.json({ message: `Successfully removed item from database` });
+        res.json({ message: `Successfully removed item with id ${id} from database` });
       } else {
         res
           .status(404)

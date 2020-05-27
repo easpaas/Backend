@@ -4,6 +4,7 @@ module.exports = {
   add,
   find,
   findById,
+  findSellersItems,
   update,
   remove
 }
@@ -22,6 +23,11 @@ async function add(item) {
     throw error;
   }
 }
+
+function findSellersItems(id) {
+  return db("items").where("seller_id", "=",`${id}`);
+}
+
 
 function findById(id) {
   return db("items").where({ id });
