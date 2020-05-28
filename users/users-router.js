@@ -1,4 +1,6 @@
 const router = require("express").Router();
+const jwt = require("jsonwebtoken");
+
 
 const Users = require("./users-model.js");
 const restricted = require("../auth/restricted-middleware.js");
@@ -8,8 +10,7 @@ router.use(restricted);
 
 router.get("/", (req,res) => {
   Users.find().then(users => {
-    console.log(users)
-    res.status(200).json({data: users})
+    res.status(200).json({ data: users })
   })
   .catch(err => {
     res.status(500).json({ message: err.message })
@@ -33,20 +34,42 @@ router.post("/", (req, res) => {
 });
 
 // Update a user as a seller or bidder
+// Returns a updated JWT 
 router.put("/:id", (req, res) => {
-  const {id} = req.params;
+  const { id } = req.params;
   const changes = req.body;
 
   Users.update(changes, id)
-    .then(updatedUser => {
-      updatedUser ?
-      res.status(200).json(updatedUser)
-      :
-      res.status(404).json({ message: `Could not find user with id = ${id}`})
+    .then(success => {
+      Users.findById(id)
+        .then(updatedUser => {
+          const token = createToken(updatedUser)
+          res.status(200).json({ data: token })
+        })
+        .catch(err => {
+          res.status(404).json({ message: `Could not find user with id = ${id}`})
+        });
     })
     .catch(err => {
       res.status(500).json({ message: err.message });
     });
 });
+
+
+function createToken(user) {
+  const payload = {
+    sub: user[0].id,
+    username: user[0].username,
+    seller: user[0].seller,
+  };
+
+  const secret = process.env.JWT_SECRET || "keepitsecret,keepitsafe!";
+
+  const options = {
+    expiresIn: "1d",
+  };
+
+  return jwt.sign(payload, secret, options);
+}
 
 module.exports = router;

@@ -1,10 +1,12 @@
+require('dotenv').config();
+
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-require('dotenv').config();
-const router = require("express").Router();
 
 const Users = require("../users/users-model.js");
 const { isValid } = require("../users/users-service.js");
+const router = require("express").Router();
+
 
 router.post("/register", (req, res) => {
   const credentials = req.body;
