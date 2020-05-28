@@ -28,6 +28,7 @@ exports.up = function (knex) {
     })
 
     .createTable("item_bids", tbl => {
+
       // FOREIGN KEY
       tbl
         .integer("item_id")
@@ -49,5 +50,8 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
-  return knex.schema.dropTableIfExists("item_bids").dropTableIfExists("items").dropTableIfExists("users");
+  return knex.schema
+  .dropTableIfExists("item_bids")
+  .dropTableIfExists("items")
+  .dropTableIfExists("users")
 };

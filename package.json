@@ -4,12 +4,9 @@
   "description": "#### This project was built with Node.js, Express, Knex and Postgres",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env DB_ENV=testing jest --watch",
+    "test": "cross-env DB_ENV=testing jest --watch --runInBand",
     "start": "node index",
-    "server": "nodemon",
-    "migrate": "knex migrate:latest",
-    "unmigrate": "knex migrate:rollback",
-    "seed": "knex seed:run"
+    "server": "nodemon"
   },
   "repository": {
     "type": "git",
@@ -25,10 +22,10 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
-    "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "helmet": "^3.22.0",
+    "jest": "^26.0.1",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.21.1",
     "logger": "0.0.1",
@@ -37,7 +34,7 @@
     "sqlite3": "^4.2.0"
   },
   "devDependencies": {
-    "jest": "^26.0.1",
+    "cross-env": "^7.0.2",
     "nodemon": "^2.0.4",
     "supertest": "^4.0.2"
   },
