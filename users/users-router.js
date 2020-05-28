@@ -49,20 +49,4 @@ router.put("/:id", (req, res) => {
     });
 });
 
-// TODO - this middleware should be used within the items router to prevent anyone but a bidder from creating items
-
-
-// // middleware
-// function checkRole(user) {
-//   return function (req, res, next) {
-//     const seller = req.jwt.seller;
-
-//     if (req.jwt && req.jwt.seller) {
-//       next();
-//     } else {
-//       res.status(403).json({ you: "have no power here" });
-//     }
-//   };
-// }
-
 module.exports = router;

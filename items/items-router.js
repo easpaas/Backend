@@ -9,7 +9,7 @@ const router = express.Router();
 // Require JWT to access
 router.use(restricted);
 
-router.get("/", (req, res) => {
+router.get("/", checkUser(), (req, res) => {
   Items.find()
     .then(items => {
       res.status(200).json(items);
@@ -101,5 +101,29 @@ router.delete("/:id", (req, res) => {
       res.status(500).json({ message: "Failed to delete item" });
     });
 });
+
+// TODO - this middleware should be used within the items router to prevent anyone but a bidder from creating items
+
+// middleware
+function checkUser() {
+  return function (req, res, next) {
+// jwt: {
+//   sub: 3,
+//   username: 'user',
+//   seller: false,
+//   iat: 1590614994,
+//   exp: 1590701394
+// },
+
+    console.log('req', req)
+    console.log('res', res)
+    console.log('next', next)
+    // if () {
+    //   next();
+    // } else {
+    //   res.status(403).json({ you: "have no power here" });
+    // }
+  };
+}
 
 module.exports = router;
