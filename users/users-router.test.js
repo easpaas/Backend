@@ -8,8 +8,7 @@ test('register user', async () => {
     .post("/api/auth/register")
     .send({username: "Evan", password: "password", seller: true});
 
-    console.log(res)
-    // expect(res.status).toBe(200);
+    expect(res.status).toBe(201);
 });
 
 test('login user', async () => {
@@ -22,48 +21,17 @@ test('login user', async () => {
     expect(res.status).toBe(200)
 });
 
-// test('GET /api/users returns list of users', async () => {
-//   const login = await request(server)
-//     .post("/api/auth/login")
-//     .send({username: "Evan", password: "password"});
+test('GET /api/users returns list of users', async () => {
+  const login = await request(server)
+    .post("/api/auth/login")
+    .send({username: "Evan", password: "password"});
+
+  // assign token given back from server
+  const token = login.body.token;
   
-//   const res = await request(server)
-//     .get("/api/users")
-//     .withCredentials(login.body.token)
-//     console.log(res)
-// })
-
-// test('GET /api/users returns list of users', async () => {
-//   const user = {
-//     username: "evan",
-//     password: "password",
-//     seller: true
-//   };
-//   const userLogin = {
-//     username: "evan",
-//     password: "password"
-//   };
-
-//   // post to Register
-//   const register = await request(server)
-//     .post("/api/auth/register")
-//     .send(user);
-
-//     console.log(register.body)
-
-  // // post to Login 
-  // const login = await request(server)
-  //   .post("/api/auth/login")
-  //   .send(userLogin);
-
-  //   console.log(login);
-
-  // TODO save token 
-  
-  // const res = request(server)
-  //   .get("/api/users")
-  //   .then(response => {
-  //     console.log(response)
-  //   })
-// })
-
+  const res = await request(server)
+    .get("/api/users")
+    .set('authorization', token)
+    
+    expect(res.status).toBe(200)
+});
