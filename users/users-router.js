@@ -16,6 +16,7 @@ router.get("/", (req,res) => {
   });
 });
 
+// Require JWT to access any endpoints below this line
 router.use(restricted);
 
 router.post("/", (req, res) => {
@@ -32,6 +33,18 @@ router.post("/", (req, res) => {
   } else {
     res.status(400).json({ message: "please provide all user information" });
   }
+});
+
+router.delete("/:id", (req, res) => {
+  const {id} = req.params;
+
+  Users.remove(id)
+    .then(success => {
+      res.status(200).json({ message: `Successfully removed user id ${id} `})
+    })
+    .catch(err => {
+      res.status(500).json({ errorMessage: err.message })
+    });
 });
 
 module.exports = router;
