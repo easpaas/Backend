@@ -6,7 +6,6 @@ const Users = require("./users-model.js");
 const restricted = require("../auth/restricted-middleware.js");
 const { isValid } = require("./users-service.js");
 
-router.use(restricted);
 
 router.get("/", (req,res) => {
   Users.find().then(users => {
@@ -16,6 +15,8 @@ router.get("/", (req,res) => {
     res.status(500).json({ message: err.message })
   });
 });
+
+router.use(restricted);
 
 router.post("/", (req, res) => {
   const user = req.body;

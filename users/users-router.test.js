@@ -5,7 +5,7 @@ const server = require("../api/server.js");
 test('register user', async () => {
   const res = await request(server)
     .post("/api/auth/register")
-    .send({username: "Evan", password: "password", seller: true});
+    .send({username: "Chris", password: "pass", seller: true});
 
     expect(res.status).toBe(201);
 });
