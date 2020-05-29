@@ -3,7 +3,6 @@ const express = require("express");
 const restricted = require("../auth/restricted-middleware.js");
 const Items = require("./items-model.js");
 
-
 const router = express.Router();
 
 // Require JWT to access
@@ -88,7 +87,7 @@ router.delete("/:id", checkIfSeller(), (req, res) => {
   Items.remove(id)
     .then(deleted => {
       if (deleted) {
-        res.json({ message: `Successfully removed item with id ${id} from database` });
+        res.status(204).json({ message: `Successfully removed item from database` });
       } else {
         res
           .status(404)

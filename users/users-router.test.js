@@ -2,7 +2,6 @@ const request = require('supertest');
 const db = require("../data/dbConfig.js");
 const server = require("../api/server.js");
 
-
 test('register user', async () => {
   const res = await request(server)
     .post("/api/auth/register")
@@ -21,7 +20,7 @@ test('login user', async () => {
     expect(res.status).toBe(200)
 });
 
-test('GET /api/users returns list of users', async () => {
+test('GET /api/users is successful', async () => {
   const login = await request(server)
     .post("/api/auth/login")
     .send({username: "Evan", password: "password"});
