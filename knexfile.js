@@ -1,8 +1,7 @@
 // Update with your config settings.
 require("dotenv").config();
 
-// TODO make Heroku URL 
-const pgConnection = process.env.DB_URL || "postgresql://postgres@localhost/silent_auction2";
+const pgConnection = process.env.DB_URL || "postgres://ihamevkkrfgpmz:8f31542774757ccf5c42df0617866c0879efa48b0f00bd4ccce5bc0e16a610e4@ec2-54-165-36-134.compute-1.amazonaws.com:5432/dei74gp0736j0i";
 const pgPassword = process.env.PG_PASSWORD;
 
 module.exports = {
@@ -40,7 +39,7 @@ module.exports = {
 
   production: {
     client: "pg",
-    connection: "",
+    connection: pgConnection,
     pool: {
       min: 2,
       max: 10,
